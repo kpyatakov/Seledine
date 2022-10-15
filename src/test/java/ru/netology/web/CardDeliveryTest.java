@@ -13,6 +13,10 @@ import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CardDeliveryTest {
+	
+	  public static String generateDate(int days) {
+        return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+    }
 
     @Test
     public void shouldTest() {
@@ -20,7 +24,7 @@ public class CardDeliveryTest {
         Configuration.holdBrowserOpen = true;
         $("[data-test-id=city] input").setValue("Санкт-Петербург");
         $("[data-test-id=date] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        String date = LocalDate.now().plusDays(4).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        String planningDate = generateDate(4);
         $("[data-test-id=date] input").setValue(date);
         $("[data-test-id=name] input").setValue("Иванов Иван");
         $("[data-test-id=phone] input").setValue("+79998887766");
